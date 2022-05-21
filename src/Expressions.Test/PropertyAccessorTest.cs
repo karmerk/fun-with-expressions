@@ -53,9 +53,10 @@ public class PropertyAccessorTest
     public record TestRecordWithoutSetter(string Name);
 
     [TestMethod]
-    public void RecordClassCanBeModified()
+    public void RecordCanBeModified()
     {
         // Ouch, i was expected records not to have setters, but they do.. and can be modified using reflection or the trick i am using
+        // So a friend of mine, told me that record classes immutablility is only enforced compilation, i guess that explains it.
 
         var accessor = PropertyAccessor.From<TestRecordWithoutSetter, string>(x => x.Name);
         var obj = new TestRecordWithoutSetter(Guid.NewGuid().ToString());
