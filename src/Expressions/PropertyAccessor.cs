@@ -21,6 +21,9 @@ public sealed class PropertyAccessor<T, TProperty>
     private readonly Func<T, TProperty>? _getValue;
     private readonly Action<T, TProperty>? _setValue;
 
+    public bool CanGetValue => _getValue != null;
+    public bool CanSetValue => _setValue != null;
+
     public PropertyAccessor(PropertyInfo property)
     {
         _property = property;
@@ -28,7 +31,7 @@ public sealed class PropertyAccessor<T, TProperty>
         _getValue = CreateGetValue();
         _setValue = CreateSetValue();
     }
-
+    
     public TProperty GetValue(T obj)
     {
         if (_getValue == null)
